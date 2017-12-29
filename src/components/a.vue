@@ -20,10 +20,13 @@
 		<span>{{numb}}</span>
 		<span>{{numb1}}</span> -->
 
+		<render :level='1'>hello</render>
+
 	</div>
 </template>
 <script type="text/javascript">	
 import abc from '@/components/b.vue'
+import render from '@/components/render.vue'
 	export default{
 		data(){
 			return {
@@ -40,7 +43,8 @@ import abc from '@/components/b.vue'
 		},
 
 		components:{
-			abc:abc
+			abc:abc,
+			render:render,
 		},
 		methods:{
 			click(){
@@ -63,7 +67,18 @@ import abc from '@/components/b.vue'
 				console.log(newvalue)
 				this.numb1 = newvalue
 				console.log(this.numb1)
-			}
+			},
+			// numb:{
+			// 	// 监听回调函数
+			// 	hander:function(newvalue,oldvalue){
+			// 		console.log(newvalue)
+			// 		this.numb1 = newvalue
+			// 		console.log(this.numb1)
+			// 	},
+			// 	//深度watcher
+			// 	deep:true,
+			// 	immediate:true,//该回调会在侦听开始后被立即调用
+			// }
 		}
 	};
 	// 全局组件
