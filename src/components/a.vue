@@ -1,11 +1,17 @@
 <template>
 	<div class="a">
-		<!-- v-model语法糖的实现方式
-		<custom-input
-  			v-bind:value="something"
-  			v-on:input="something = arguments[0]">
-		</custom-input>
-		<abc v-model = "string">
+		<!-- v-model语法糖的实现方式 -->
+	<!-- 	<input
+  			v-bind:value="inputValue"
+  			v-on:input='inputValue = $event.target.value'> -->
+
+		<!-- 组件中的写法 -->
+		<!-- <custom-input
+		  v-bind:value="something"
+		  v-on:input="something = arguments[0]">
+		</custom-input> -->
+
+		<!-- <abc v-model = "string">
   			<span slot = "header">header</span>	
   		</abc>  -->
 
@@ -20,13 +26,19 @@
 		<span>{{numb}}</span>
 		<span>{{numb1}}</span> -->
 
-		<render :level='1'>hello</render>
+		<!-- <render :level='1'>hello</render> -->
+		
+		<inputComponent :inputValue = "inputValue" @input = "inputValue=arguments[0]"></inputComponent>
+		<inputComponent v-model = "inputValue"></inputComponent>
+		<inputComponent ></inputComponent>
+		
 
 	</div>
 </template>
 <script type="text/javascript">	
 import abc from '@/components/b.vue'
 import render from '@/components/render.vue'
+import inputComponent from '@/components/inputComponent.vue'
 	export default{
 		data(){
 			return {
@@ -38,19 +50,25 @@ import render from '@/components/render.vue'
 					numb:2,
 					numb1:3
 				},
-				component:'abc'
+				component:'abc',
+				inputValue:'123'
 			}
 		},
 
 		components:{
 			abc:abc,
 			render:render,
+			inputComponent
 		},
 		methods:{
 			click(){
 				this.numb++
 				// vue.$data.numb 相当于 vue.numb
 				// console.log(this.$data.numb)
+			},
+			input(arg){
+				console.log(arg);
+				this.inputValue = arg;
 			}
 
 		},
