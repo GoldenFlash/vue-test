@@ -26,22 +26,29 @@
 		<span>{{numb}}</span>
 		<span>{{numb1}}</span> -->
 
-		<!-- <render :level='1'>hello</render> -->
+		<render :level='1'>
+			<span slot = 'foo'>hello</span>
+		</render>
 		
 		<inputComponent :inputValue = "inputValue" @input = "inputValue=arguments[0]"></inputComponent>
 		<inputComponent v-model = "inputValue"></inputComponent>
 		<inputComponent ></inputComponent>
-		
+		<bComponent v-bind='msg'></bComponent>
+		<bComponent message ="message"></bComponent><!--字面量传值方式传的是字符串-->
 
 	</div>
 </template>
 <script type="text/javascript">	
-import abc from '@/components/b.vue'
+import bComponent from '@/components/b.vue'
 import render from '@/components/render.vue'
 import inputComponent from '@/components/inputComponent.vue'
 	export default{
 		data(){
 			return {
+				msg:{
+					name:'a',
+					age:12
+				},
 				string:'',
 				numb:1,
 				numb1:1,
@@ -56,9 +63,10 @@ import inputComponent from '@/components/inputComponent.vue'
 		},
 
 		components:{
-			abc:abc,
+			
 			render:render,
-			inputComponent
+			inputComponent,
+			bComponent,
 		},
 		methods:{
 			click(){
