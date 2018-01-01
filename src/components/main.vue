@@ -21,27 +21,36 @@
 		<!-- component 标签绑定is属性表示子模块 -->
 		<!-- <component v-bind:is="component"></component>  -->
 
-		<!-- 	watch
-		<button @click="click">click a</button>
-		<span>{{numb}}</span>
-		<span>{{numb1}}</span> -->
-
-		<render :level='1'>
+			
+		<!-- <button @click="click">click a</button> -->
+		<!-- <span>{{numb}}</span>
+		<span>{{numb1}}</span>
+ -->
+		<!-- <render :level='1'>
 			<span slot = 'foo'>hello</span>
-		</render>
-		
-		<inputComponent :inputValue = "inputValue" @input = "inputValue=arguments[0]"></inputComponent>
-		<inputComponent v-model = "inputValue"></inputComponent>
-		<inputComponent ></inputComponent>
-		<bComponent v-bind='msg'></bComponent>
-		<bComponent message ="message"></bComponent><!--字面量传值方式传的是字符串-->
+		</render> -->
+		<!-- arguments[0]为子组件向父组件传递的参数 this.$emit('eventType',arguments[0]) -->
+		<!-- <inputComponent :inputValue = "inputValue" @input = "inputValue=arguments[0]"></inputComponent> -->
+		<!-- <inputComponent v-model = "inputValue"></inputComponent> -->
+		<!-- <inputComponent ></inputComponent> -->
 
+		<!--相当于v-bind:name="msg.name"-->
+		<!-- <bComponent v-bind='msg'></bComponent>  -->
+
+		<!--字面量传值方式传的是字符串-->
+		<!-- <bComponent message ="message"></bComponent> -->
+		<!-- <button @click="click">click a</button>
+		<div>{{message.name}}</div> -->
+		<formc ></formc>
+		<directive></directive>
 	</div>
 </template>
 <script type="text/javascript">	
 import bComponent from '@/components/b.vue'
 import render from '@/components/render.vue'
 import inputComponent from '@/components/inputComponent.vue'
+import formc from '@/components/form.vue'
+import directive from '@/components/directives.vue'
 	export default{
 		data(){
 			return {
@@ -53,13 +62,24 @@ import inputComponent from '@/components/inputComponent.vue'
 				numb:1,
 				numb1:1,
 				message:{
-					name:'wang',
+					name:'wei',
 					numb:2,
 					numb1:3
 				},
 				component:'abc',
-				inputValue:'123'
+				inputValue:'123',
+				checked:[]
 			}
+		},
+		mixins:[
+				{
+				 created: function () {
+				    console.log('混合对象的钩子被调用')
+				 }
+			}
+		],
+		created: function () {
+		    console.log('组件钩子被调用')
 		},
 
 		components:{
@@ -67,12 +87,22 @@ import inputComponent from '@/components/inputComponent.vue'
 			render:render,
 			inputComponent,
 			bComponent,
+			formc,
+			directive,
 		},
 		methods:{
 			click(){
-				this.numb++
+				// this.numb++
 				// vue.$data.numb 相当于 vue.numb
 				// console.log(this.$data.numb)
+				// this.$set(this.message,'name',1)//可以在data中的对象上添加属性,vue.set
+
+				// console.log(this.$el.textContent)//获取el下的text
+				this.message.name = 'wang';
+				console.log(this.$el.textContent)//wei
+				this.$nextTick(function(){//dom更新后执行 vue.$nextTick()
+					console.log(this.$el.textContent)//wang
+				})
 			},
 			input(arg){
 				console.log(arg);
@@ -111,6 +141,7 @@ import inputComponent from '@/components/inputComponent.vue'
 	// Vue.component('component-c',{
 	// 	template:'<span>cccc</span>'
 	// })
+	
 </script>
 <style type="text/css">
 	.a{
