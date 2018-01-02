@@ -1,5 +1,5 @@
 <template>
-	<input type="text" name="" v-focus>
+	<input type="text" name="" v-focus:a="1" v-colorSwatch>
 </template>
 <script type="text/javascript">
 	export default{
@@ -17,8 +17,18 @@
 		directives:{
 			focus:{
 				// inserted：被绑定元素插入父节点时调用 (仅保证父节点存在但不一定已被插入文档中)。
-				inserted:function(el){
-					el.focus()
+				inserted:function(el,binding,vNode){
+					// el.focus()
+					console.log(binding)
+					console.log(vNode)
+				}
+			},
+			// colorSwatch:function(){
+			// 	console.log(2)
+			// }
+			colorSwatch:{
+				update:function(){
+					console.log(2)
 				}
 			}
 		}
