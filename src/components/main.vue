@@ -22,13 +22,14 @@
 		<!-- <component v-bind:is="component"></component>  -->
 
 			
-		<!-- <button @click="click">click a</button> -->
+		<button @click="click">click a</button>
+		 <div>{{message.name}}</div>
 		<!-- <span>{{numb}}</span>
 		<span>{{numb1}}</span>
  -->
-		<!-- <render :level='1'>
+		<render :level='1'>
 			<span slot = 'foo'>hello</span>
-		</render> -->
+		</render>
 		<!-- arguments[0]为子组件向父组件传递的参数 this.$emit('eventType',arguments[0]) -->
 		<!-- <inputComponent :inputValue = "inputValue" @input = "inputValue=arguments[0]"></inputComponent> -->
 		<!-- <inputComponent v-model = "inputValue"></inputComponent> -->
@@ -41,12 +42,12 @@
 		<!-- <bComponent message ="message"></bComponent> -->
 		<!-- <button @click="click">click a</button>
 		<div>{{message.name}}</div> -->
-		<formc ></formc>
-		<directive></directive>
+		<!-- <formc ></formc> -->
+		<!-- <directive></directive> -->
 	</div>
 </template>
 <script type="text/javascript">	
-import bComponent from '@/components/b.vue'
+import bComponent from '@/components/component.vue'
 import render from '@/components/render.vue'
 import inputComponent from '@/components/inputComponent.vue'
 import formc from '@/components/form.vue'

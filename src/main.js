@@ -6,6 +6,7 @@ import App from './App'
 import router from './router'
 
 Vue.config.productionTip = false
+// Vue.config.devtools = true
 
 /* eslint-disable no-new */
 new Vue({
@@ -15,3 +16,19 @@ new Vue({
    components: { 'App':App },//App标签中引用的App组件
   //render: h => h(App)//替代上面两行
 })
+//nextTick中没有参数时才能使用promise
+Vue.nextTick().then(function(){
+	console.log('promise.then')
+})
+
+//相当于一个新的new实例
+var profil = Vue.extend({
+	template:'<span>123</span>',
+	data(){
+		return{
+			
+		}
+	}
+
+})
+new profil().$mount("#extend")

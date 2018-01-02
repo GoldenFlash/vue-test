@@ -11,21 +11,30 @@
 
 <script type="text/javascript">
 export default{
-	props:{
-			level:{
-				type:Number,
-				required:true
-			}
-		},
+	functional:true, //函数式插件标志
+	// props:{
+	// 		level:{
+	// 			type:Number,
+	// 			required:true
+	// 		}
+	// 	},
 	data(){
 		return{
 			items:[1,2,3,4,5]
 		}
 	},
-	render:function(createElement){
+	render:function(createElement,context){
 		// this.$slots.default //slot插槽中的内容
-		return createElement('h'+this.level,//此模块的最外层元素
+		return createElement('h1',//此模块的最外层元素
+				
 				{//外层元素的配置
+					props:{  //functional:true props 需要放在render后
+						level:{
+							type:Number,
+							required:true
+						}
+					},
+
 					on:{
 						click:function(){
 							console.log(2)
@@ -44,10 +53,10 @@ export default{
 						},
 						on:{
 							click:function(){
-								console.log(1)
+								console.log(context)
 							}
 						},
-					},this.$slots.foo)
+					},context.children) //this.$slots.foo
 				]
 			)
 	},
