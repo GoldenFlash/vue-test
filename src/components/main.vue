@@ -22,14 +22,14 @@
 		<!-- <component v-bind:is="component"></component>  -->
 
 			
-		<button @click="click">click a</button>
-		 <div>{{message.name}}</div>
+	<!-- 	<button @click="click">click a</button>
+		 <div>{{message.name}}</div> -->
 		<!-- <span>{{numb}}</span>
 		<span>{{numb1}}</span>
- -->
+ --><!-- 
 		<render :level='1'>
 			<span slot = 'foo'>hello</span>
-		</render>
+		</render> -->
 		<!-- arguments[0]为子组件向父组件传递的参数 this.$emit('eventType',arguments[0]) -->
 		<!-- <inputComponent :inputValue = "inputValue" @input = "inputValue=arguments[0]"></inputComponent> -->
 		<!-- <inputComponent v-model = "inputValue"></inputComponent> -->
@@ -44,6 +44,9 @@
 		<div>{{message.name}}</div> -->
 		<!-- <formc ></formc> -->
 		<!-- <directive></directive> -->
+		<div v-once>{{numb}}</div>
+		<button @click="click">click</button>
+		<button @click="aPlus++">clickset</button>
 	</div>
 </template>
 <script type="text/javascript">	
@@ -69,22 +72,23 @@ import directive from '@/components/directives.vue'
 				},
 				component:'abc',
 				inputValue:'123',
-				checked:[]
+				checked:[],
+				
 			}
-		},
-		mixins:[
-				{
-				 created: function () {
-				    console.log('混合对象的钩子被调用')
-				 }
-			}
-		],
-		created: function () {
-		    console.log('组件钩子被调用')
 		},
 
+		// mixins:[
+		// 		{
+		// 		 created: function () {
+		// 		    console.log('混合对象的钩子被调用')
+		// 		 }
+		// 	}
+		// ],
+		// created: function () {
+		//     console.log('组件钩子被调用')
+		// },
+
 		components:{
-			
 			render:render,
 			inputComponent,
 			bComponent,
@@ -93,17 +97,18 @@ import directive from '@/components/directives.vue'
 		},
 		methods:{
 			click(){
-				// this.numb++
+				 this.numb++
+				 console.log(this.$root)
 				// vue.$data.numb 相当于 vue.numb
 				// console.log(this.$data.numb)
 				// this.$set(this.message,'name',1)//可以在data中的对象上添加属性,vue.set
 
 				// console.log(this.$el.textContent)//获取el下的text
-				this.message.name = 'wang';
-				console.log(this.$el.textContent)//wei
-				this.$nextTick(function(){//dom更新后执行 vue.$nextTick()
-					console.log(this.$el.textContent)//wang
-				})
+				// this.message.name = 'wang';
+				// console.log(this.$el.textContent)//wei
+				// this.$nextTick(function(){//dom更新后执行 vue.$nextTick()
+				// 	console.log(this.$el.textContent)//wang
+				// })
 			},
 			input(arg){
 				console.log(arg);
@@ -114,17 +119,25 @@ import directive from '@/components/directives.vue'
 		//计算属性性质与data中的数据相同，当计算属性所依赖的属性发生改变时时时改变属性的值，
 		//当依赖的属性值没有发生改变时会利用缓存的值而不会去计算（读取计算属性时）
 		computed:{
-
+			aPlus:{
+				get(){
+					return this.numb+1
+				},
+				set(value){
+					this.numb=value-1;
+					console.log(this.numb)
+				}
+			}
 		},
 		//当背监视的数据发生改变时通知依赖此数据的数据发生改变（调用watch中对应的函数）,被监视的数据必须在data中存在
 		//watch中的函数名即为被监视的数据
 		// 实例属性 vue.$watch
 		watch:{
-			numb:function(newvalue,oldvalue){
-				console.log(newvalue)
-				this.numb1 = newvalue
-				console.log(this.numb1)
-			},
+			//numb:function(newvalue,oldvalue){
+				//console.log(newvalue)
+				//this.numb1 = newvalue
+				//console.log(this.numb1)
+			//},
 			// numb:{
 			// 	// 监听回调函数
 			// 	hander:function(newvalue,oldvalue){

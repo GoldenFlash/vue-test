@@ -22,6 +22,10 @@
 				checked:[],
 				lazy:'',
 			}
+		},
+		mounted(){
+			console.log(this.$root)
 		}
+
 	}
 </script>

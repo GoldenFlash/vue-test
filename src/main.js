@@ -17,18 +17,18 @@ new Vue({
   //render: h => h(App)//替代上面两行
 })
 //nextTick中没有参数时才能使用promise
-Vue.nextTick().then(function(){
-	console.log('promise.then')
-})
+// Vue.nextTick().then(function(){
+// 	console.log('promise.then')
+// })
 
 //相当于一个新的new实例
-var profil = Vue.extend({
-	template:'<span>123</span>',
-	data(){
-		return{
+// var profil = Vue.extend({
+// 	template:'<span>vue实例2</span>',
+// 	data(){
+// 		return{
 			
-		}
-	}
+// 		}
+// 	}
 
-})
-new profil().$mount("#extend")
+// })
+// new profil().$mount("#extend")
