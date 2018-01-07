@@ -13,13 +13,22 @@ export default new Router({
     {
       path: '/',
       name: 'HelloWorld',
-      component: HelloWorld,
+      components:{
+        default:HelloWorld,
+        a:router
+      },
     },
     {
       path: '/a',
+      alias:'/c', //路由别名
       name: 'a',
       component: a,
     },
+    // {
+    //   path: '/b',
+    //   name: 'b',
+    //   redirect:'/a' //路由重定向
+    // },
     {
       path:'/life',
       name:'life',
@@ -34,13 +43,30 @@ export default new Router({
       path:'/routerc',
       name:'routerc',
       component:routerc,
-      children:[
-        {
-          path:'foo',
-          component:foo,
+      // component:{
+      //   default:routerc,
+      //   // a:foo
+      // },
+      // props:{name:'true'}
+      props:true,
+      // children:[ //子路由在父级模块内的router-view中显示
+      //   {
+      //     path:'foo',
+      //     component:foo,
 
-        }
-      ]
+      //   }
+      // ]
     },
+     {
+      path:'/foo',
+      name:'foo',
+      component:foo,
+    },
+    // {
+    //   path:'/routerc/123',
+    //   name:'routerc',
+    //   component:routerc,
+      
+    // },
   ]
 })

@@ -1,14 +1,27 @@
 <template>
 	<div>
 		<!-- <div>router</div> -->
-		<router-link to="/routerc/foo">foo</router-link>
-		<!-- <router-view></router-view> -->
+		<button @click="click">go to foo</button>
+		<!-- <router-view :message="aa"></router-view> -->
+		<router-view name="a"></router-view>
+		<!-- <div>{{name}}</div> -->
 	</div>
 </template>
 <script type="text/javascript">
 	export default{
+		props:["id"],
+		methods:{
+			click(){
+				this.$router.push({
+					path:'/routerc/foo',
+
+				})
+			}
+		},
 		mounted(){
+			console.log(this.$props.id)
 			console.log(this.$route.params)
+			// console.log(this.$route.query)
 		}
 	}
 </script>
